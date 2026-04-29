@@ -23,10 +23,10 @@ export default function Home() {
   }, [active, hydrated]);
 
   return (
-    <main className="relative min-h-screen flex flex-col">
+    <main className="relative h-screen flex flex-col overflow-hidden">
       {/* Top bar */}
-      <header className="relative z-20 border-b-2 border-navy bg-cream">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+      <header className="relative z-20 border-b-2 border-navy bg-cream shrink-0">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg sticker-navy grid place-items-center font-bold tilt-l-sm">
               S
@@ -43,7 +43,7 @@ export default function Home() {
       </header>
 
       {/* Sub bar with tabs */}
-      <div className="relative z-10 border-b-2 border-navy bg-white sticky top-0">
+      <div className="relative z-10 border-b-2 border-navy bg-white shrink-0">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-3">
           <span className="hidden md:inline text-[10px] font-bold uppercase tracking-widest text-navy/50 shrink-0">
             Pick a mentor →
@@ -52,19 +52,12 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex-1">
+      <div className="flex-1 min-h-0 relative">
         {hydrated &&
           (Object.keys(mentors) as MentorId[]).map((id) => (
             <MentorChat key={id} mentor={mentors[id]} visible={id === active} />
           ))}
       </div>
-
-      <footer className="relative z-10 border-t-2 border-navy bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
-          <div className="font-bold">Scaler Mentor — a chat with three voices.</div>
-          <div className="text-navy/60">Built with Next.js · GPT-5.2 · chats live only on this device</div>
-        </div>
-      </footer>
     </main>
   );
 }
