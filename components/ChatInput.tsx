@@ -21,8 +21,7 @@ export function ChatInput({ mentor, value, onChange, onSubmit, disabled }: Props
   return (
     <form
       onSubmit={(e) => { e.preventDefault(); if (!disabled && value.trim()) onSubmit(); }}
-      className="border border-rule bg-paper"
-      style={{ borderLeftWidth: "3px", borderLeftColor: mentor.accent }}
+      className="rounded-lg border-2 border-navy bg-white shadow-sticker"
     >
       <textarea
         ref={ref}
@@ -34,17 +33,16 @@ export function ChatInput({ mentor, value, onChange, onSubmit, disabled }: Props
             if (!disabled && value.trim()) onSubmit();
           }
         }}
-        rows={2}
+        rows={1}
         placeholder={`Ask ${mentor.name.split(" ")[0]}…`}
-        className="w-full bg-transparent px-4 py-3 outline-none text-sm placeholder:text-muted"
+        className="w-full bg-transparent px-4 pt-3 pb-1 outline-none text-sm placeholder:text-navy/40"
       />
-      <div className="flex items-center justify-between px-4 py-2 border-t border-rule/60">
-        <span className="smallcaps text-muted">Enter to send · Shift+Enter for newline</span>
+      <div className="flex items-center justify-between px-3 py-2 border-t-2 border-navy/10">
+        <span className="text-[11px] text-navy/50 font-medium">⏎ send · ⇧⏎ newline</span>
         <button
           type="submit"
           disabled={disabled || !value.trim()}
-          className="smallcaps px-3 py-1.5 disabled:opacity-30"
-          style={{ color: mentor.accent }}
+          className="px-4 py-1.5 rounded-md bg-lime border-2 border-navy text-navy text-xs font-bold disabled:opacity-30 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0 transition-transform shadow-sticker-sm"
         >
           Send →
         </button>

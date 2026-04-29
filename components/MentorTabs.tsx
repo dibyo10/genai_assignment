@@ -8,39 +8,31 @@ interface Props {
 
 export function MentorTabs({ active, onChange }: Props) {
   return (
-    <nav className="grid grid-cols-3 border-y border-rule">
-      {mentorList.map((m: Mentor) => {
+    <div className="flex gap-3 overflow-x-auto scrollbar-thin pb-1">
+      {mentorList.map((m: Mentor, i) => {
         const isActive = m.id === active;
+        const tilt = i === 0 ? "tilt-l-sm" : i === 2 ? "tilt-r-sm" : "";
         return (
           <button
             key={m.id}
             onClick={() => onChange(m.id)}
-            className={`group relative px-4 py-5 text-left transition-colors duration-200 ${
-              isActive ? "bg-paper" : "hover:bg-black/[0.02]"
+            className={`shrink-0 px-4 py-2 text-sm font-bold flex items-center gap-2 transition-all rounded-md border-2 border-navy ${tilt} ${
+              isActive
+                ? "bg-navy text-white shadow-sticker-lime translate-y-0"
+                : "bg-white text-navy shadow-sticker-sm hover:-translate-y-0.5"
             }`}
-            style={{
-              borderTop: `3px solid ${isActive ? m.accent : "transparent"}`,
-              marginTop: "-1px",
-            }}
           >
-            <div className="flex items-baseline gap-3">
-              <span
-                className="smallcaps"
-                style={{ color: isActive ? m.accent : "#6b6457" }}
-              >
-                No. 0{["anshuman", "abhimanyu", "kshitij"].indexOf(m.id) + 1}
-              </span>
-              {isActive && (
-                <span className="smallcaps text-muted">— now reading</span>
-              )}
-            </div>
-            <div className="display text-2xl mt-1 leading-tight">
-              {m.name}
-            </div>
-            <div className="text-xs text-muted mt-1">{m.title}</div>
+            <span
+              className={`w-6 h-6 rounded-full grid place-items-center text-[10px] font-bold border-2 border-navy ${
+                isActive ? "bg-lime text-navy" : "bg-navy text-white"
+              }`}
+            >
+              {m.avatar}
+            </span>
+            <span>{m.name.split(" ")[0]}</span>
           </button>
         );
       })}
-    </nav>
+    </div>
   );
 }

@@ -8,21 +8,18 @@ interface Props {
 
 export function SuggestionChips({ mentor, onPick }: Props) {
   return (
-    <div className="space-y-2">
-      <div className="smallcaps text-muted">Suggested openings</div>
-      <ul className="space-y-2">
-        {mentor.suggestions.map((s) => (
-          <li key={s}>
-            <button
-              onClick={() => onPick(s)}
-              className="text-left w-full px-4 py-3 border border-rule hover:border-ink transition-colors text-sm"
-              style={{ borderLeftWidth: "3px", borderLeftColor: mentor.accent }}
-            >
-              {s}
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div className="grid sm:grid-cols-2 gap-3">
+      {mentor.suggestions.map((s, i) => (
+        <button
+          key={s}
+          onClick={() => onPick(s)}
+          className={`text-left px-4 py-3 rounded-md border-2 border-navy bg-white hover:bg-lime transition-all hover:-translate-y-0.5 text-sm font-medium shadow-sticker-sm ${
+            i % 2 === 0 ? "tilt-l-sm" : "tilt-r-sm"
+          }`}
+        >
+          {s}
+        </button>
+      ))}
     </div>
   );
 }
